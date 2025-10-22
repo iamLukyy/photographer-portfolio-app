@@ -1,12 +1,12 @@
 {
-  "photographerName": "Your Name",
-  "location": "Your City, Country",
-  "bio": "I'm a photographer passionate about capturing moments. This is where you describe your photography style, specialties, and what makes your work unique. You can edit this text in the admin settings panel.",
-  "email": "your-email@example.com",
-  "instagram": "@yourhandle",
+  "photographerName": "test",
+  "location": "Prague",
+  "bio": "Rfejowfjewfiejwjfiew",
+  "email": "tewte@gmail.com",
+  "instagram": "@lukykarel",
   "profilePhoto": "/profile-placeholder.svg",
-  "siteTitle": "Your Photography Portfolio",
+  "siteTitle": "Portfolio",
   "languages": "English",
-  "equipment": "Your camera system",
-  "isConfigured": false
+  "equipment": "Sony",
+  "isConfigured": true
 }
