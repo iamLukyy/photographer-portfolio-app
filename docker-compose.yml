@@ -1,0 +1,37 @@
+services:
+  photo-portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        RESEND_API_KEY: ${RESEND_API_KEY}
+        CONTACT_EMAIL: ${CONTACT_EMAIL}
+    container_name: photo-portfolio-app
+    restart: unless-stopped
+    ports:
+      - "3044:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      # Email configuration
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - CONTACT_EMAIL=${CONTACT_EMAIL}
+    volumes:
+      # Persistent storage for uploaded photos (bind mount for nginx access)
+      - ./data/uploads:/app/public/uploads
+      # Persistent storage for metadata (photos.json, bookings.json, coupons.json)
+      - ./data/lib:/app/lib
+      # System time sync
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - photo-portfolio-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  photo-portfolio-network:
+    driver: bridge

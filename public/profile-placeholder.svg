@@ -1,0 +1,13 @@
+<svg width="800" height="1000" viewBox="0 0 800 1000" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="1000" fill="#f5f5f5"/>
+
+  <!-- Simple profile silhouette -->
+  <circle cx="400" cy="350" r="120" fill="#d1d1d1"/>
+  <path d="M 200 900 Q 400 700 600 900" fill="#d1d1d1"/>
+
+  <!-- Text -->
+  <text x="400" y="960" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#999">
+    Your Profile Photo
+  </text>
+</svg>

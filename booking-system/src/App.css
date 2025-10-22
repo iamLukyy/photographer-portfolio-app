@@ -1,0 +1,115 @@
+/* Minimalist Calendar Styles */
+
+.minimal-calendar {
+  font-family: var(--font-eb-garamond, 'EB Garamond', serif);
+}
+
+/* Calendar toolbar */
+.rbc-toolbar {
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.rbc-toolbar button {
+  color: #111827;
+  border: none;
+  background: transparent;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-weight: 400;
+  transition: opacity 0.3s;
+}
+
+.rbc-toolbar button:hover,
+.rbc-toolbar button:focus {
+  background: transparent;
+  opacity: 0.6;
+}
+
+.rbc-toolbar button:active,
+.rbc-toolbar button.rbc-active {
+  background: transparent;
+  opacity: 1;
+  border-bottom: 2px solid #111827;
+}
+
+/* Calendar header */
+.rbc-header {
+  padding: 1rem 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 400;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Calendar cells */
+.rbc-day-bg {
+  border-left: 1px solid #f3f4f6;
+}
+
+.rbc-today {
+  background-color: #f9fafb;
+}
+
+.rbc-off-range-bg {
+  background-color: #fafafa;
+}
+
+.rbc-date-cell {
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.rbc-off-range {
+  color: #d1d5db;
+}
+
+/* Events */
+.rbc-event {
+  padding: 2px 5px;
+  font-size: 11px;
+  border-radius: 0;
+}
+
+.rbc-event.rbc-selected {
+  background-color: #1f2937;
+}
+
+/* Month view specific */
+.rbc-month-view {
+  border: 1px solid #e5e7eb;
+}
+
+.rbc-month-row {
+  border-top: 1px solid #f3f4f6;
+}
+
+/* Time slots */
+.rbc-time-slot {
+  border-top: 1px solid #f3f4f6;
+}
+
+.rbc-current-time-indicator {
+  background-color: #111827;
+  height: 2px;
+}
+
+/* Selection */
+.rbc-slot-selection {
+  background-color: rgba(17, 24, 39, 0.1);
+  border: 2px solid #111827;
+}
+
+/* Remove default focus outlines and add custom */
+.rbc-toolbar button:focus,
+.rbc-day-slot:focus,
+.rbc-date-cell:focus {
+  outline: 2px solid #111827;
+  outline-offset: 2px;
+}
