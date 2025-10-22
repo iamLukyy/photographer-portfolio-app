@@ -46,7 +46,10 @@ pnpm install
 
 # Set up environment
 cp .env.example .env
-# Edit .env and add your Resend API key
+# Edit .env and configure:
+# - RESEND_API_KEY (get free key at resend.com)
+# - CONTACT_EMAIL (your email address)
+# - ADMIN_PASSWORD (secure password for admin panel)
 
 # Start dev server
 pnpm dev
@@ -71,8 +74,10 @@ pnpm dev
 1. Push your code to GitHub
 2. Go to [vercel.com](https://vercel.com) → **Import Project**
 3. Select your repo
-4. Add environment variable:
+4. Add environment variables:
    - `RESEND_API_KEY` - Your Resend API key ([get free key](https://resend.com))
+   - `CONTACT_EMAIL` - Your email address
+   - `ADMIN_PASSWORD` - Secure password for admin panel
 5. Click **Deploy** ✨
 
 **After deployment:**
@@ -113,7 +118,7 @@ cd photographer-portfolio-app
 
 # Set up environment
 cp .env.example .env
-nano .env  # Add your Resend API key
+nano .env  # Configure: RESEND_API_KEY, CONTACT_EMAIL, ADMIN_PASSWORD
 
 # Build and start
 docker-compose up -d --build
@@ -224,9 +229,9 @@ sudo certbot --nginx -d yourdomain.com
 - ✅ HTTPS ready (via Vercel or nginx)
 
 **Production checklist:**
-- [ ] Change admin password in `lib/auth.ts`
+- [ ] Set strong `ADMIN_PASSWORD` in `.env` (never commit .env!)
 - [ ] Enable HTTPS
-- [ ] Keep Resend API key private
+- [ ] Keep all environment variables private
 - [ ] Regular backups of `data/` folder
 
 ---
@@ -255,7 +260,7 @@ data/
 | Photos not showing | Check `data/uploads/` permissions: `chmod -R 755 data/` |
 | Email not sending | Verify `RESEND_API_KEY` in `.env` is correct |
 | Upload fails | Check file size (≤100MB) and disk space |
-| Can't login to admin | Check password in `lib/auth.ts` |
+| Can't login to admin | Verify `ADMIN_PASSWORD` is set in `.env` |
 
 More help: [Full Documentation](./CLAUDE.md)
 
