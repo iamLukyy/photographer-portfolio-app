@@ -35,7 +35,7 @@ export async function GET(
     else if (ext === 'webp') contentType = 'image/webp';
     else if (ext === 'gif') contentType = 'image/gif';
 
-    return new NextResponse(fileBuffer, {
+    return new Response(new Uint8Array(fileBuffer), {
       headers: {
         'Content-Type': contentType,
         'Cache-Control': 'public, max-age=31536000, immutable',

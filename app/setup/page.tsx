@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import type { PortfolioSettings } from '@/types/settings';
 
 export default function SetupWizard() {
   const router = useRouter();
   const [step, setStep] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
   const [settings, setSettings] = useState<Partial<PortfolioSettings>>({
     photographerName: '',
     location: '',
@@ -17,6 +18,28 @@ export default function SetupWizard() {
     languages: 'English',
     equipment: '',
   });
+
+  // Check if setup is already complete - redirect if so
+  useEffect(() => {
+    const checkSetupStatus = async () => {
+      try {
+        const res = await fetch('/api/settings');
+        const data = await res.json();
+
+        if (data.isConfigured) {
+          // Already configured - redirect to home
+          router.push('/');
+        } else {
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error('Failed to check setup status:', error);
+        setIsLoading(false);
+      }
+    };
+
+    checkSetupStatus();
+  }, [router]);
 
   const handleNext = () => {
     if (step < 3) setStep(step + 1);
@@ -51,6 +74,20 @@ export default function SetupWizard() {
 
   const isStep1Valid = settings.photographerName && settings.email && settings.siteTitle;
   const isStep2Valid = settings.bio && settings.location;
+
+  // Show loading state while checking setup status
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-neutral-900 to-neutral-800 flex items-center justify-center">
+        <div className="text-white text-center">
+          <div className="animate-pulse mb-4">
+            <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
+          </div>
+          <p className="text-neutral-300">Checking setup status...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-900 to-neutral-800 flex items-center justify-center p-6">

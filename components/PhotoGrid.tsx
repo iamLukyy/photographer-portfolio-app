@@ -21,14 +21,14 @@ export default function PhotoGrid({ photos }: PhotoGridProps) {
   return (
     <>
       {/* CSS Grid with variable sizes */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 auto-rows-[300px] sm:grid-flow-dense">
+      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1.5 sm:gap-2 auto-rows-[200px] sm:auto-rows-[300px] grid-flow-dense">
         {photos.map((photo, index) => (
           <div
             key={photo.id}
             className={`
               overflow-hidden
-              ${photo.gridWidth === 2 ? 'sm:col-span-2' : ''}
-              ${photo.gridHeight === 2 ? 'sm:row-span-2' : ''}
+              ${photo.gridWidth === 2 ? 'col-span-2' : ''}
+              ${photo.gridHeight === 2 ? 'row-span-2' : ''}
             `}
           >
             <PhotoCard
