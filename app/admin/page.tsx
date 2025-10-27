@@ -417,6 +417,12 @@ export default function AdminPage() {
             </div>
             <div className="flex items-center gap-6">
               <Link
+                href="/admin/settings"
+                className="text-sm text-gray-600 hover:text-gray-900"
+              >
+                Settings
+              </Link>
+              <Link
                 href="/admin/coupons"
                 className="text-sm text-gray-600 hover:text-gray-900"
               >
