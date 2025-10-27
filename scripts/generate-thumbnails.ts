@@ -1,12 +1,20 @@
 import type { Photo } from '../types/photo';
 import { ensureThumbnail } from '../lib/thumbnails';
 import { readFile } from 'fs/promises';
+import { existsSync } from 'fs';
 import path from 'path';
 
 const force = process.argv.includes('--force');
 
 async function loadPhotos(): Promise<Photo[]> {
   const photosPath = path.join(process.cwd(), 'lib', 'photos.json');
+
+  // Check if file exists - if not, return empty array (fresh install)
+  if (!existsSync(photosPath)) {
+    console.log('ℹ️  No photos.json found - skipping thumbnail generation (fresh install)');
+    return [];
+  }
+
   const raw = await readFile(photosPath, 'utf-8');
   return JSON.parse(raw) as Photo[];
 }
