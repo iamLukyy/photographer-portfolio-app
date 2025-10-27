@@ -311,12 +311,16 @@ export default function AdminPage() {
         if (res.status === 413) {
           alert('File is too large. Vercel Free tier has a 4.5MB limit. Please compress your image or upgrade to Vercel Pro for 100MB limit.');
         } else {
-          alert('Error uploading');
+          const errorMsg = errorDetails && typeof errorDetails === 'object' && 'error' in errorDetails
+            ? String(errorDetails.error)
+            : res.statusText;
+          alert(`Upload failed: ${errorMsg}\n\nStatus: ${res.status}\nCheck browser console (F12) for details.`);
         }
       }
     } catch (error) {
       console.error('Error uploading photo:', error);
-      alert('Error uploading');
+      const errorMsg = error instanceof Error ? error.message : 'Unknown error';
+      alert(`Upload failed: ${errorMsg}\n\nCheck browser console (F12) for details.`);
     } finally {
       setUploading(false);
     }
