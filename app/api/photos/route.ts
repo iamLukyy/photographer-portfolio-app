@@ -6,6 +6,9 @@ import sizeOf from 'image-size';
 import { ensureThumbnail, removeThumbnail } from '@/lib/thumbnails';
 import type { Photo } from '@/types/photo';
 
+// Increase timeout for photo uploads and thumbnail generation
+export const maxDuration = 60; // 60 seconds (Vercel limit)
+
 export async function GET(request: NextRequest) {
   // Check if this is an admin request (has specific header or from admin page)
   const referer = request.headers.get('referer');

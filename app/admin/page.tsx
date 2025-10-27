@@ -272,6 +272,16 @@ export default function AdminPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Check file size (Vercel Free tier limit: 4.5MB)
+    const maxSizeMB = 4.5;
+    const fileSizeMB = file.size / (1024 * 1024);
+
+    if (fileSizeMB > maxSizeMB) {
+      alert(`File is too large (${fileSizeMB.toFixed(1)}MB). Maximum size on Vercel Free tier is ${maxSizeMB}MB. Please compress your image or upgrade to Vercel Pro.`);
+      e.target.value = '';
+      return;
+    }
+
     setUploading(true);
     const formData = new FormData();
     formData.append('file', file);
@@ -299,7 +309,7 @@ export default function AdminPage() {
           body: errorDetails,
         });
         if (res.status === 413) {
-          alert('File is too large. Please try a smaller JPEG/PNG (limit 100 MB).');
+          alert('File is too large. Vercel Free tier has a 4.5MB limit. Please compress your image or upgrade to Vercel Pro for 100MB limit.');
         } else {
           alert('Error uploading');
         }
@@ -434,16 +444,22 @@ export default function AdminPage() {
               >
                 Bookings
               </Link>
-              <label className="bg-black text-white px-4 py-2 text-sm rounded hover:bg-gray-800 transition-colors cursor-pointer whitespace-nowrap">
-                {uploading ? 'Uploading...' : 'Upload Photo'}
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleUpload}
-                  className="hidden"
-                  disabled={uploading}
-                />
-              </label>
+              <div className="relative group">
+                <label className="bg-black text-white px-4 py-2 text-sm rounded hover:bg-gray-800 transition-colors cursor-pointer whitespace-nowrap">
+                  {uploading ? 'Uploading...' : 'Upload Photo'}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleUpload}
+                    className="hidden"
+                    disabled={uploading}
+                  />
+                </label>
+                <div className="hidden group-hover:block absolute top-full right-0 mt-2 w-64 bg-gray-900 text-white text-xs p-3 rounded shadow-lg z-50">
+                  📦 Max size: <strong>4.5MB</strong> (Vercel Free)<br/>
+                  💡 Compress large images before upload
+                </div>
+              </div>
               <button
                 onClick={handleLogout}
                 className="bg-gray-200 text-black px-4 py-2 text-sm rounded hover:bg-gray-300 transition-colors whitespace-nowrap"
