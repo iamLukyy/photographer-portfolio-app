@@ -16,6 +16,9 @@ services:
       # Email configuration
       - RESEND_API_KEY=${RESEND_API_KEY}
       - CONTACT_EMAIL=${CONTACT_EMAIL}
+      # Admin authentication
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - ADMIN_COOKIE_SECURE=${ADMIN_COOKIE_SECURE}
     volumes:
       # Persistent storage for uploaded photos (bind mount for nginx access)
       - ./data/uploads:/app/public/uploads
