@@ -6,6 +6,10 @@ import { join } from 'path';
 import type { PortfolioSettings } from '@/types/settings';
 import { generateFontUrl, generateThemeCSS } from '@/lib/theme';
 
+// Force dynamic rendering - settings can change at runtime
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // Load settings server-side
 function loadSettings(): PortfolioSettings | null {
   try {
