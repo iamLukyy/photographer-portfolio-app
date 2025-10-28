@@ -11,7 +11,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ed?style=flat&logo=docker)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat)](LICENSE)
 
-[Live Demo](https://lukaskarel.com/) • [Documentation](#-quick-start) • [Deploy](#-deployment)
+[Documentation](#-quick-start) • [Deploy](#-deployment) • [Features](#-whats-inside)
 
 ![Portfolio Preview](.github/preview.png)
 

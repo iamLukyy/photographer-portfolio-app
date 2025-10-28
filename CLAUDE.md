@@ -6,6 +6,27 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A generic photography portfolio template with integrated booking system. Built with Next.js 15, featuring photo grid with lightbox, booking system, admin panel, and complete customization through web UI. **No code editing required** for photographers to personalize their portfolio.
 
+## VPS Deployment (mareksvaton.cz)
+
+**Production Server**:
+- **SSH Access**: `ssh had`
+- **Project Path**: `/var/www/fotimanalogem`
+- **Public URL**: `https://mareksvaton.cz`
+- **Docker Port**: 3055 (internal → 3000)
+- **Data Storage**: `/var/www/fotimanalogem/data/`
+  - Photos: `/var/www/fotimanalogem/data/uploads/`
+  - Metadata: `/var/www/fotimanalogem/data/lib/` (settings.json, photos.json, bookings.json, coupons.json)
+
+**Common VPS Commands**:
+```bash
+ssh had "cd /var/www/fotimanalogem && git pull"                    # Pull latest changes
+ssh had "cd /var/www/fotimanalogem && docker compose build && docker compose up -d"  # Rebuild and restart
+ssh had "cd /var/www/fotimanalogem && docker compose logs -f"       # View logs
+ssh had "cd /var/www/fotimanalogem && docker compose restart"       # Quick restart
+```
+
+**Complete deployment guide**: See `VPS_DEPLOYMENT.md` in project root.
+
 ## Core Tech Stack
 
 - **Framework**: Next.js 15.5.2 (App Router, React 19)

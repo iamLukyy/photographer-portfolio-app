@@ -5,6 +5,7 @@ import { join } from 'path';
 import { Resend } from 'resend';
 
 const BOOKINGS_FILE = join(process.cwd(), 'lib', 'bookings.json');
+const SETTINGS_FILE = join(process.cwd(), 'lib', 'settings.json');
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface Booking {
@@ -117,11 +118,21 @@ export async function POST(request: Request) {
     const startDate = new Date(startTime);
     const endDate = new Date(endTime);
 
+    // Load settings to get recipient email
+    let recipientEmail = process.env.CONTACT_EMAIL || 'your-email@example.com';
+    try {
+      const settingsData = readFileSync(SETTINGS_FILE, 'utf-8');
+      const settings = JSON.parse(settingsData);
+      recipientEmail = settings.email || recipientEmail;
+    } catch (error) {
+      console.warn('Could not load settings.json, using fallback email');
+    }
+
     console.log('📧 Sending booking notification email...');
 
     const { data: emailData, error: emailError } = await resend.emails.send({
       from: 'Photography Portfolio <onboarding@resend.dev>',
-      to: ['lukyn.karel97@gmail.com'],
+      to: [recipientEmail],
       replyTo: email,
       subject: `New Booking: ${name}`,
       html: `

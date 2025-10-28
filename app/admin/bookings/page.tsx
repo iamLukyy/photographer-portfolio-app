@@ -231,7 +231,7 @@ export default function AdminBookingsPage() {
                 href="/"
                 className="text-lg font-normal tracking-wide uppercase hover:opacity-60 transition-opacity"
               >
-                Lukas Karel Photography
+                Photography Portfolio
               </Link>
               <span className="text-sm text-gray-500 hidden sm:inline">Admin / Bookings</span>
             </div>

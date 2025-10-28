@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Admin - Lukas Karel Photography',
+  title: 'Admin Panel - Photography Portfolio',
   description: 'Admin dashboard for photo management',
 };
 
