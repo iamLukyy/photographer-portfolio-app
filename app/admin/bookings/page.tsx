@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
+import AdminHeader from '@/components/AdminHeader';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -160,10 +160,6 @@ export default function AdminBookingsPage() {
     }
   };
 
-  const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' });
-    router.push('/');
-  };
 
   // Format bookings for calendar
   const calendarEvents = bookings
@@ -235,42 +231,7 @@ export default function AdminBookingsPage() {
         </div>
       )}
 
-      {/* Admin Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-[1920px] mx-auto px-12 sm:px-16 lg:px-24 xl:px-32">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center gap-8">
-              <Link
-                href="/"
-                className="text-lg font-normal tracking-wide uppercase hover:opacity-60 transition-opacity"
-              >
-                {settings?.siteTitle || 'Photography Portfolio'}
-              </Link>
-              <span className="text-sm text-gray-500 hidden sm:inline">Admin / Bookings</span>
-            </div>
-            <div className="flex items-center gap-6">
-              <Link href="/admin" className="text-sm text-gray-600 hover:text-gray-900">
-                Photos
-              </Link>
-              <Link href="/admin/coupons" className="text-sm text-gray-600 hover:text-gray-900">
-                Coupons
-              </Link>
-              <Link href="/admin/theme" className="text-sm text-gray-600 hover:text-gray-900">
-                Theme
-              </Link>
-              <Link href="/admin/settings" className="text-sm text-gray-600 hover:text-gray-900">
-                Settings
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="bg-gray-200 text-black px-4 py-2 text-sm rounded hover:bg-gray-300 transition-colors whitespace-nowrap"
-              >
-                Log out
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <AdminHeader siteTitle={settings?.siteTitle} breadcrumb="Admin / Bookings" />
 
       {/* Content */}
       <div className="w-full px-4 sm:px-6 lg:px-8 py-8">

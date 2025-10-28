@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import AdminHeader from '@/components/AdminHeader';
 import type { PortfolioSettings } from '@/types/settings';
 
 export default function SettingsPage() {
@@ -89,10 +89,6 @@ export default function SettingsPage() {
     }
   };
 
-  const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' });
-    router.push('/');
-  };
 
   if (!settings) {
     return (
@@ -104,42 +100,7 @@ export default function SettingsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Admin Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-[1920px] mx-auto px-12 sm:px-16 lg:px-24 xl:px-32">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center gap-8">
-              <Link
-                href="/"
-                className="text-lg font-normal tracking-wide uppercase hover:opacity-60 transition-opacity"
-              >
-                {settings?.siteTitle || 'Photography Portfolio'}
-              </Link>
-              <span className="text-sm text-gray-500 hidden sm:inline">Admin / Settings</span>
-            </div>
-            <div className="flex items-center gap-6">
-              <Link href="/admin" className="text-sm text-gray-600 hover:text-gray-900">
-                Photos
-              </Link>
-              <Link href="/admin/bookings" className="text-sm text-gray-600 hover:text-gray-900">
-                Bookings
-              </Link>
-              <Link href="/admin/coupons" className="text-sm text-gray-600 hover:text-gray-900">
-                Coupons
-              </Link>
-              <Link href="/admin/theme" className="text-sm text-gray-600 hover:text-gray-900">
-                Theme
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="bg-gray-200 text-black px-4 py-2 text-sm rounded hover:bg-gray-300 transition-colors whitespace-nowrap"
-              >
-                Log out
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <AdminHeader siteTitle={settings?.siteTitle} breadcrumb="Admin / Settings" />
 
       {/* Content */}
       <div className="w-full px-4 sm:px-6 lg:px-8 py-8">

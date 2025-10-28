@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 import Lightbox from '@/components/Lightbox';
+import AdminHeader from '@/components/AdminHeader';
 import { shimmerDataUrl } from '@/lib/imagePlaceholders';
 import type { PortfolioSettings } from '@/types/settings';
 
@@ -229,11 +229,6 @@ export default function AdminPage() {
     }
   };
 
-  const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' });
-    setIsAuthenticated(false);
-    router.push('/');
-  };
 
   const fetchPhotos = async () => {
     try {
@@ -429,58 +424,28 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Admin Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-[1920px] mx-auto px-12 sm:px-16 lg:px-24 xl:px-32">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center gap-8">
-              <Link
-                href="/"
-                className="text-lg font-normal tracking-wide uppercase hover:opacity-60 transition-opacity"
-              >
-                {settings?.siteTitle || 'Photography Portfolio'}
-              </Link>
-              <span className="text-sm text-gray-500 hidden sm:inline">Admin</span>
-            </div>
-            <div className="flex items-center gap-6">
-              <Link href="/admin/bookings" className="text-sm text-gray-600 hover:text-gray-900">
-                Bookings
-              </Link>
-              <Link href="/admin/coupons" className="text-sm text-gray-600 hover:text-gray-900">
-                Coupons
-              </Link>
-              <Link href="/admin/theme" className="text-sm text-gray-600 hover:text-gray-900">
-                Theme
-              </Link>
-              <Link href="/admin/settings" className="text-sm text-gray-600 hover:text-gray-900">
-                Settings
-              </Link>
-              <div className="relative group">
-                <label className="bg-black text-white px-4 py-2 text-sm rounded hover:bg-gray-800 transition-colors cursor-pointer whitespace-nowrap">
-                  {uploading ? 'Uploading...' : 'Upload Photo'}
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleUpload}
-                    className="hidden"
-                    disabled={uploading}
-                  />
-                </label>
-                <div className="hidden group-hover:block absolute top-full right-0 mt-2 w-64 bg-gray-900 text-white text-xs p-3 rounded shadow-lg z-50">
-                  📦 Max size: <strong>4.5MB</strong> (Vercel Free)<br/>
-                  💡 Compress large images before upload
-                </div>
-              </div>
-              <button
-                onClick={handleLogout}
-                className="bg-gray-200 text-black px-4 py-2 text-sm rounded hover:bg-gray-300 transition-colors whitespace-nowrap"
-              >
-                Log out
-              </button>
+      <AdminHeader
+        siteTitle={settings?.siteTitle}
+        breadcrumb="Admin"
+        extraActions={
+          <div className="relative group">
+            <label className="bg-black text-white px-4 py-2 text-sm rounded hover:bg-gray-800 transition-colors cursor-pointer whitespace-nowrap">
+              {uploading ? 'Uploading...' : 'Upload Photo'}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleUpload}
+                className="hidden"
+                disabled={uploading}
+              />
+            </label>
+            <div className="hidden group-hover:block absolute top-full right-0 mt-2 w-64 bg-gray-900 text-white text-xs p-3 rounded shadow-lg z-50">
+              📦 Max size: <strong>4.5MB</strong> (Vercel Free)<br/>
+              💡 Compress large images before upload
             </div>
           </div>
-        </div>
-      </header>
+        }
+      />
 
       {/* Content */}
       <div className="w-full px-4 sm:px-6 lg:px-8 py-8">
