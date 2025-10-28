@@ -10,7 +10,7 @@
   "equipment": "Your camera system",
   "bookingEnabled": true,
   "theme": {
-    "preset": "sepia",
-    "fontFamily": "Montserrat"
+    "preset": "gradient",
+    "fontFamily": "Unbounded"
   }
 }

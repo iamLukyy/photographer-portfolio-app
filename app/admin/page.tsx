@@ -427,30 +427,30 @@ export default function AdminPage() {
       <AdminHeader
         siteTitle={settings?.siteTitle}
         breadcrumb="Admin"
-        extraActions={
-          <div className="relative group">
-            <label className="bg-black text-white px-4 py-2 text-sm rounded hover:bg-gray-800 transition-colors cursor-pointer whitespace-nowrap">
-              {uploading ? 'Uploading...' : 'Upload Photo'}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleUpload}
-                className="hidden"
-                disabled={uploading}
-              />
-            </label>
-            <div className="hidden group-hover:block absolute top-full right-0 mt-2 w-64 bg-gray-900 text-white text-xs p-3 rounded shadow-lg z-50">
-              📦 Max size: <strong>4.5MB</strong> (Vercel Free)<br/>
-              💡 Compress large images before upload
-            </div>
-          </div>
-        }
       />
 
       {/* Content */}
       <div className="w-full px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-[1920px] mx-auto">
-          <h1 className="text-2xl sm:text-3xl font-light mb-6">Photo Management</h1>
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl sm:text-3xl font-light">Photo Management</h1>
+            <div className="relative group">
+              <label className="bg-black text-white px-4 py-2 text-sm rounded hover:bg-gray-800 transition-colors cursor-pointer whitespace-nowrap">
+                {uploading ? 'Uploading...' : 'Upload Photo'}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleUpload}
+                  className="hidden"
+                  disabled={uploading}
+                />
+              </label>
+              <div className="hidden group-hover:block absolute top-full right-0 mt-2 w-64 bg-gray-900 text-white text-xs p-3 rounded shadow-lg z-50">
+                📦 Max size: <strong>4.5MB</strong> (Vercel Free)<br/>
+                💡 Compress large images before upload
+              </div>
+            </div>
+          </div>
 
         {/* Mobile Card View */}
         <div className="block lg:hidden mt-8 space-y-4">
