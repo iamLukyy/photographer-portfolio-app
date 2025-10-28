@@ -249,23 +249,17 @@ export default function AdminBookingsPage() {
               <span className="text-sm text-gray-500 hidden sm:inline">Admin / Bookings</span>
             </div>
             <div className="flex items-center gap-6">
-              <Link
-                href="/admin"
-                className="text-sm text-gray-600 hover:text-gray-900"
-              >
+              <Link href="/admin" className="text-sm text-gray-600 hover:text-gray-900">
                 Photos
               </Link>
-              <Link
-                href="/admin/theme"
-                className="text-sm text-gray-600 hover:text-gray-900"
-              >
+              <Link href="/admin/coupons" className="text-sm text-gray-600 hover:text-gray-900">
+                Coupons
+              </Link>
+              <Link href="/admin/theme" className="text-sm text-gray-600 hover:text-gray-900">
                 Theme
               </Link>
-              <Link
-                href="/admin/coupons"
-                className="text-sm text-gray-600 hover:text-gray-900"
-              >
-                Coupons
+              <Link href="/admin/settings" className="text-sm text-gray-600 hover:text-gray-900">
+                Settings
               </Link>
               <button
                 onClick={handleLogout}

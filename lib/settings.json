@@ -11,6 +11,6 @@
   "bookingEnabled": true,
   "theme": {
     "preset": "minimalist",
-    "fontFamily": "EB Garamond"
+    "fontFamily": "Unbounded"
   }
 }

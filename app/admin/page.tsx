@@ -443,29 +443,17 @@ export default function AdminPage() {
               <span className="text-sm text-gray-500 hidden sm:inline">Admin</span>
             </div>
             <div className="flex items-center gap-6">
-              <Link
-                href="/admin/theme"
-                className="text-sm text-gray-600 hover:text-gray-900"
-              >
-                Theme
+              <Link href="/admin/bookings" className="text-sm text-gray-600 hover:text-gray-900">
+                Bookings
               </Link>
-              <Link
-                href="/admin/settings"
-                className="text-sm text-gray-600 hover:text-gray-900"
-              >
-                Settings
-              </Link>
-              <Link
-                href="/admin/coupons"
-                className="text-sm text-gray-600 hover:text-gray-900"
-              >
+              <Link href="/admin/coupons" className="text-sm text-gray-600 hover:text-gray-900">
                 Coupons
               </Link>
-              <Link
-                href="/admin/bookings"
-                className="text-sm text-gray-600 hover:text-gray-900"
-              >
-                Bookings
+              <Link href="/admin/theme" className="text-sm text-gray-600 hover:text-gray-900">
+                Theme
+              </Link>
+              <Link href="/admin/settings" className="text-sm text-gray-600 hover:text-gray-900">
+                Settings
               </Link>
               <div className="relative group">
                 <label className="bg-black text-white px-4 py-2 text-sm rounded hover:bg-gray-800 transition-colors cursor-pointer whitespace-nowrap">

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import type { PortfolioSettings } from '@/types/settings';
 
 export default function SettingsPage() {
@@ -88,6 +89,11 @@ export default function SettingsPage() {
     }
   };
 
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    router.push('/');
+  };
+
   if (!settings) {
     return (
       <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
@@ -97,19 +103,50 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 p-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-3xl font-light text-neutral-900">Portfolio Settings</h1>
-          <button
-            onClick={() => router.push('/admin')}
-            className="px-4 py-2 text-sm text-neutral-600 hover:text-neutral-900"
-          >
-            ← Back to Admin
-          </button>
+    <div className="min-h-screen bg-gray-50">
+      {/* Admin Header */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-[1920px] mx-auto px-12 sm:px-16 lg:px-24 xl:px-32">
+          <div className="flex justify-between items-center h-20">
+            <div className="flex items-center gap-8">
+              <Link
+                href="/"
+                className="text-lg font-normal tracking-wide uppercase hover:opacity-60 transition-opacity"
+              >
+                {settings?.siteTitle || 'Photography Portfolio'}
+              </Link>
+              <span className="text-sm text-gray-500 hidden sm:inline">Admin / Settings</span>
+            </div>
+            <div className="flex items-center gap-6">
+              <Link href="/admin" className="text-sm text-gray-600 hover:text-gray-900">
+                Photos
+              </Link>
+              <Link href="/admin/bookings" className="text-sm text-gray-600 hover:text-gray-900">
+                Bookings
+              </Link>
+              <Link href="/admin/coupons" className="text-sm text-gray-600 hover:text-gray-900">
+                Coupons
+              </Link>
+              <Link href="/admin/theme" className="text-sm text-gray-600 hover:text-gray-900">
+                Theme
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="bg-gray-200 text-black px-4 py-2 text-sm rounded hover:bg-gray-300 transition-colors whitespace-nowrap"
+              >
+                Log out
+              </button>
+            </div>
+          </div>
         </div>
+      </header>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-sm p-8 space-y-6">
+      {/* Content */}
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-2xl sm:text-3xl font-light mb-6">Portfolio Settings</h1>
+
+          <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-sm p-8 space-y-6">
           {/* Basic Info Section */}
           <div className="space-y-4">
             <h2 className="text-xl font-medium text-neutral-900 border-b pb-2">
@@ -317,6 +354,7 @@ export default function SettingsPage() {
             </button>
           </div>
         </form>
+        </div>
       </div>
     </div>
   );
