@@ -19,8 +19,8 @@ services:
     volumes:
       # Persistent storage for uploaded photos (bind mount for nginx access)
       - ./data/uploads:/app/public/uploads
-      # Persistent storage for metadata (named volume to preserve permissions)
-      - app_data:/app/lib
+      # Persistent storage for metadata (bind mount for backup and visibility)
+      - ./data/lib:/app/lib
       # System time sync
       - /etc/localtime:/etc/localtime:ro
     networks:
@@ -31,10 +31,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-
-volumes:
-  app_data:
-    driver: local
 
 networks:
   photo-portfolio-network:
