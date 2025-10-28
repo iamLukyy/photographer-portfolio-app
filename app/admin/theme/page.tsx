@@ -427,10 +427,8 @@ export default function AdminThemePage() {
                       : 'border-gray-200 hover:border-gray-400'
                   }`}
                   style={{
-                    fontFamily: `'${selectedFont}', ${
-                      AVAILABLE_FONTS.find((f) => f.name === selectedFont)?.type === 'serif'
-                        ? 'Georgia, serif'
-                        : 'Arial, sans-serif'
+                    fontFamily: `'${font.name}', ${
+                      font.type === 'serif' ? 'Georgia, serif' : 'Arial, sans-serif'
                     }`,
                   }}
                 >
