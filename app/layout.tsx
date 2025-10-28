@@ -49,13 +49,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Dynamic Google Fonts */}
+        {/* Theme CSS Variables - MUST come first */}
+        <style dangerouslySetInnerHTML={{ __html: themeCSS }} />
+
+        {/* Preload & Load Google Font - display=block prevents FOUC */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href={fontUrl} rel="stylesheet" />
-
-        {/* Theme CSS Variables */}
-        <style dangerouslySetInnerHTML={{ __html: themeCSS }} />
+        <link rel="preload" as="style" href={fontUrl} />
+        <link rel="stylesheet" href={fontUrl} />
       </head>
       <body>
         <Header />
