@@ -87,9 +87,6 @@ export default function AboutPage() {
                 About
               </h2>
               <div className="flex flex-col gap-3 text-gray-700 leading-relaxed text-base">
-                <p className="m-0">
-                  My name is {settings.photographerName}. I&apos;m a photographer based in {settings.location}.
-                </p>
                 <p className="m-0 whitespace-pre-line">
                   {settings.bio}
                 </p>
