@@ -21,5 +21,6 @@ export interface PortfolioSettings {
   siteTitle: string;
   languages: string;
   equipment: string;
+  bookingEnabled?: boolean;
   theme?: ThemeSettings;
 }

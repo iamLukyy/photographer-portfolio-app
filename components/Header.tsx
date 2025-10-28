@@ -25,10 +25,13 @@ export default function Header() {
     }
   };
 
+  // Filter nav items based on settings
   const navItems = [
     { name: 'Portfolio', href: '/' },
     { name: 'About', href: '/about' },
-    { name: 'Booking', href: '/booking' },
+    ...(settings?.bookingEnabled !== false
+      ? [{ name: 'Booking', href: '/booking' }]
+      : []),
   ];
 
   return (

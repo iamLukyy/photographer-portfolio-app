@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Calendar, momentLocalizer, Event as BigCalendarEvent } from 'react-big-calendar';
 import moment from 'moment';
 import toast, { Toaster } from 'react-hot-toast';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import type { PortfolioSettings } from '@/types/settings';
 
 const localizer = momentLocalizer(moment);
 
@@ -23,6 +24,8 @@ interface BookingResponse {
 }
 
 export default function BookingPage() {
+  const [settings, setSettings] = useState<PortfolioSettings | null>(null);
+  const [loadingSettings, setLoadingSettings] = useState(true);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [couponCode, setCouponCode] = useState('');
   const [couponError, setCouponError] = useState('');
@@ -35,6 +38,22 @@ export default function BookingPage() {
   const [selectedDay, setSelectedDay] = useState<Date | null>(null);
   const [events, setEvents] = useState<BookingEvent[]>([]);
   const [userInfo, setUserInfo] = useState<{ name: string; email: string } | null>(null);
+
+  // Fetch settings to check if booking is enabled
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const res = await fetch('/api/settings');
+        const data = await res.json();
+        setSettings(data);
+      } catch (error) {
+        console.error('Failed to fetch settings:', error);
+      } finally {
+        setLoadingSettings(false);
+      }
+    };
+    fetchSettings();
+  }, []);
   const promptUnlock = useCallback(() => {
     toast.error('Please enter your booking code to unlock the calendar.', {
       duration: 2500,
@@ -250,6 +269,41 @@ export default function BookingPage() {
     };
     return { style };
   };
+
+  // Loading state
+  if (loadingSettings) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p style={{ color: 'var(--color-primary)', opacity: 0.6 }}>Loading...</p>
+      </div>
+    );
+  }
+
+  // Booking disabled state
+  if (settings?.bookingEnabled === false) {
+    return (
+      <div className="min-h-screen px-6 sm:px-10 lg:px-16 xl:px-24 py-20 sm:py-32 flex items-center justify-center">
+        <div className="max-w-2xl text-center">
+          <h1 className="text-2xl sm:text-3xl font-light mb-6" style={{ color: 'var(--color-primary)' }}>
+            Booking Unavailable
+          </h1>
+          <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--color-primary)', opacity: 0.7 }}>
+            The booking system is currently not available. Please check back later or contact us directly for inquiries.
+          </p>
+          <a
+            href="/about"
+            className="inline-block text-sm font-normal tracking-[0.3em] uppercase transition-opacity border-b-2 pb-1 hover:opacity-70"
+            style={{
+              color: 'var(--color-primary)',
+              borderColor: 'var(--color-accent)'
+            }}
+          >
+            Contact Us
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen px-6 sm:px-10 lg:px-16 xl:px-24 py-12 sm:py-16">

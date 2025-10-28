@@ -278,6 +278,34 @@ export default function SettingsPage() {
             </div>
           </div>
 
+          {/* Features Section */}
+          <div className="space-y-4">
+            <h2 className="text-xl font-medium text-neutral-900 border-b pb-2">
+              Features
+            </h2>
+
+            <div className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                id="bookingEnabled"
+                checked={settings.bookingEnabled ?? true}
+                onChange={(e) =>
+                  setSettings({ ...settings, bookingEnabled: e.target.checked })
+                }
+                className="w-4 h-4 text-neutral-900 border-neutral-300 rounded focus:ring-neutral-900 cursor-pointer"
+              />
+              <label
+                htmlFor="bookingEnabled"
+                className="text-sm font-medium text-neutral-700 cursor-pointer"
+              >
+                Enable Booking System
+              </label>
+            </div>
+            <p className="text-xs text-neutral-500 ml-7">
+              When disabled, the Booking link will be hidden from navigation and the booking page will show a message that bookings are currently unavailable.
+            </p>
+          </div>
+
           {/* Save Button */}
           <div className="pt-6 border-t">
             <button
