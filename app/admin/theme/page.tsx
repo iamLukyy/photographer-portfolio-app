@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
 import type { PortfolioSettings, ThemePreset, ThemeSettings } from '@/types/settings';
-import { AVAILABLE_FONTS, THEME_PRESETS } from '@/lib/theme';
+import { AVAILABLE_FONTS, THEME_PRESETS, generateFontUrl } from '@/lib/theme';
 
 export default function AdminThemePage() {
   const router = useRouter();
@@ -69,6 +69,24 @@ export default function AdminThemePage() {
       fetchSettings();
     }
   }, [isAuthenticated, fetchSettings]);
+
+  // Load all fonts for preview
+  useEffect(() => {
+    // Inject link tags for all fonts
+    AVAILABLE_FONTS.forEach((font) => {
+      const fontUrl = generateFontUrl(font.name);
+      const linkId = `font-preview-${font.name.replace(/\s+/g, '-')}`;
+
+      // Check if already loaded
+      if (!document.getElementById(linkId)) {
+        const link = document.createElement('link');
+        link.id = linkId;
+        link.rel = 'stylesheet';
+        link.href = fontUrl;
+        document.head.appendChild(link);
+      }
+    });
+  }, []);
 
   const handlePresetChange = (preset: ThemePreset) => {
     setSelectedPreset(preset);
@@ -413,7 +431,14 @@ export default function AdminThemePage() {
                     {font.type}
                   </p>
                   <p className="text-lg font-medium mb-2">{font.name}</p>
-                  <p className="text-sm text-gray-600" style={{ fontFamily: font.name }}>
+                  <p
+                    className="text-sm text-gray-600"
+                    style={{
+                      fontFamily: `'${font.name}', ${
+                        font.type === 'serif' ? 'Georgia, serif' : 'Arial, sans-serif'
+                      }`,
+                    }}
+                  >
                     The quick brown fox jumps over the lazy dog
                   </p>
                 </button>
