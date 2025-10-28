@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Lightbox from '@/components/Lightbox';
 import { shimmerDataUrl } from '@/lib/imagePlaceholders';
+import type { PortfolioSettings } from '@/types/settings';
 
 interface Photo {
   id: string;
@@ -167,9 +168,11 @@ export default function AdminPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [savedPhotoId, setSavedPhotoId] = useState<string | null>(null);
+  const [settings, setSettings] = useState<PortfolioSettings | null>(null);
 
   useEffect(() => {
     checkAuth();
+    fetchSettings();
   }, []);
 
   useEffect(() => {
@@ -177,6 +180,16 @@ export default function AdminPage() {
       fetchPhotos();
     }
   }, [isAuthenticated]);
+
+  const fetchSettings = async () => {
+    try {
+      const res = await fetch('/api/settings');
+      const data = await res.json();
+      setSettings(data);
+    } catch (error) {
+      console.error('Failed to fetch settings:', error);
+    }
+  };
 
   const checkAuth = async () => {
     try {
@@ -425,7 +438,7 @@ export default function AdminPage() {
                 href="/"
                 className="text-lg font-normal tracking-wide uppercase hover:opacity-60 transition-opacity"
               >
-                Photography Portfolio
+                {settings?.siteTitle || 'Photography Portfolio'}
               </Link>
               <span className="text-sm text-gray-500 hidden sm:inline">Admin</span>
             </div>

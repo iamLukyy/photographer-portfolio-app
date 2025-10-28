@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import type { PortfolioSettings } from '@/types/settings';
 
 const localizer = momentLocalizer(moment);
 
@@ -32,6 +33,7 @@ export default function AdminBookingsPage() {
     show: false,
     id: null,
   });
+  const [settings, setSettings] = useState<PortfolioSettings | null>(null);
 
   const checkAuth = useCallback(async () => {
     try {
@@ -60,9 +62,20 @@ export default function AdminBookingsPage() {
     }
   }, []);
 
+  const fetchSettings = useCallback(async () => {
+    try {
+      const res = await fetch('/api/settings');
+      const data = await res.json();
+      setSettings(data);
+    } catch (error) {
+      console.error('Failed to fetch settings:', error);
+    }
+  }, []);
+
   useEffect(() => {
     checkAuth();
-  }, [checkAuth]);
+    fetchSettings();
+  }, [checkAuth, fetchSettings]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -231,7 +244,7 @@ export default function AdminBookingsPage() {
                 href="/"
                 className="text-lg font-normal tracking-wide uppercase hover:opacity-60 transition-opacity"
               >
-                Photography Portfolio
+                {settings?.siteTitle || 'Photography Portfolio'}
               </Link>
               <span className="text-sm text-gray-500 hidden sm:inline">Admin / Bookings</span>
             </div>

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
+import type { PortfolioSettings } from '@/types/settings';
 
 interface Coupon {
   id: string;
@@ -28,6 +29,7 @@ export default function AdminCouponsPage() {
     show: false,
     id: null,
   });
+  const [settings, setSettings] = useState<PortfolioSettings | null>(null);
 
   const checkAuth = useCallback(async () => {
     try {
@@ -57,9 +59,20 @@ export default function AdminCouponsPage() {
     }
   }, []);
 
+  const fetchSettings = useCallback(async () => {
+    try {
+      const res = await fetch('/api/settings');
+      const data = await res.json();
+      setSettings(data);
+    } catch (error) {
+      console.error('Failed to fetch settings:', error);
+    }
+  }, []);
+
   useEffect(() => {
     checkAuth();
-  }, [checkAuth]);
+    fetchSettings();
+  }, [checkAuth, fetchSettings]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -216,7 +229,7 @@ export default function AdminCouponsPage() {
                 href="/"
                 className="text-lg font-normal tracking-wide uppercase hover:opacity-60 transition-opacity"
               >
-                Photography Portfolio
+                {settings?.siteTitle || 'Photography Portfolio'}
               </Link>
               <span className="text-sm text-gray-500 hidden sm:inline">Admin / Coupons</span>
             </div>
