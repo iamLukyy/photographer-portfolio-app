@@ -11,6 +11,6 @@
   "bookingEnabled": true,
   "theme": {
     "preset": "minimalist",
-    "fontFamily": "Inter"
+    "fontFamily": "Raleway"
   }
 }

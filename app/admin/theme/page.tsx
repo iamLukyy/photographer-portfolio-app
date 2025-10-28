@@ -434,8 +434,10 @@ export default function AdminThemePage() {
                   <p
                     className="text-sm text-gray-600"
                     style={{
-                      fontFamily: `'${font.name}', ${
-                        font.type === 'serif' ? 'Georgia, serif' : 'Arial, sans-serif'
+                      fontFamily: `'${selectedFont}', ${
+                        AVAILABLE_FONTS.find((f) => f.name === selectedFont)?.type === 'serif'
+                          ? 'Georgia, serif'
+                          : 'Arial, sans-serif'
                       }`,
                     }}
                   >
