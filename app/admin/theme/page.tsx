@@ -426,21 +426,21 @@ export default function AdminThemePage() {
                       ? 'border-black bg-gray-50'
                       : 'border-gray-200 hover:border-gray-400'
                   }`}
+                  style={{
+                    fontFamily: `'${selectedFont}', ${
+                      AVAILABLE_FONTS.find((f) => f.name === selectedFont)?.type === 'serif'
+                        ? 'Georgia, serif'
+                        : 'Arial, sans-serif'
+                    }`,
+                  }}
                 >
                   <p className="text-xs text-gray-500 mb-1 uppercase tracking-wide">
                     {font.type}
                   </p>
-                  <p className="text-lg font-medium mb-2">{font.name}</p>
-                  <p
-                    className="text-sm text-gray-600"
-                    style={{
-                      fontFamily: `'${selectedFont}', ${
-                        AVAILABLE_FONTS.find((f) => f.name === selectedFont)?.type === 'serif'
-                          ? 'Georgia, serif'
-                          : 'Arial, sans-serif'
-                      }`,
-                    }}
-                  >
+                  <p className="text-lg font-medium mb-2">
+                    {font.name}
+                  </p>
+                  <p className="text-sm text-gray-600">
                     The quick brown fox jumps over the lazy dog
                   </p>
                 </button>
