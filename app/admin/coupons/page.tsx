@@ -241,6 +241,12 @@ export default function AdminCouponsPage() {
                 Photos
               </Link>
               <Link
+                href="/admin/theme"
+                className="text-sm text-gray-600 hover:text-gray-900"
+              >
+                Theme
+              </Link>
+              <Link
                 href="/admin/bookings"
                 className="text-sm text-gray-600 hover:text-gray-900"
               >

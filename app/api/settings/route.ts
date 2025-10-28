@@ -3,6 +3,7 @@ import { checkAuth } from '@/lib/auth';
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import type { PortfolioSettings } from '@/types/settings';
+import { isValidThemePreset, isValidFontName, isValidHexColor } from '@/lib/theme';
 
 // GET - Read settings (public for About page, no auth needed)
 export async function GET() {
@@ -31,12 +32,48 @@ export async function PUT(request: NextRequest) {
     const settingsPath = join(process.cwd(), 'lib', 'settings.json');
     const currentSettings = JSON.parse(readFileSync(settingsPath, 'utf-8')) as PortfolioSettings;
 
+    // Validate theme settings if provided
+    if (updates.theme) {
+      const { preset, fontFamily, customColors } = updates.theme;
+
+      // Validate preset
+      if (preset && !isValidThemePreset(preset)) {
+        return NextResponse.json(
+          { error: 'Invalid theme preset' },
+          { status: 400 }
+        );
+      }
+
+      // Validate font family
+      if (fontFamily && !isValidFontName(fontFamily)) {
+        return NextResponse.json(
+          { error: 'Invalid font family' },
+          { status: 400 }
+        );
+      }
+
+      // Validate custom colors if preset is custom
+      if (preset === 'custom' && customColors) {
+        const colors = [
+          customColors.primary,
+          customColors.secondary,
+          customColors.accent,
+          customColors.background,
+        ];
+
+        if (!colors.every((color) => isValidHexColor(color))) {
+          return NextResponse.json(
+            { error: 'Invalid hex color format. Use #RRGGBB format.' },
+            { status: 400 }
+          );
+        }
+      }
+    }
+
     // Merge updates with current settings
     const newSettings: PortfolioSettings = {
       ...currentSettings,
       ...updates,
-      // Mark as configured once user updates settings
-      isConfigured: true,
     };
 
     writeFileSync(settingsPath, JSON.stringify(newSettings, null, 2));

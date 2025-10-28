@@ -26,7 +26,7 @@
 - 📅 **Booking System** - Coupon-based client booking with time slots
 - 📧 **Contact Form** - Email integration via Resend API
 - ⚙️ **Admin Panel** - Full control through web UI - **no code editing required!**
-- 🎨 **Setup Wizard** - Guided first-time configuration
+- 🎨 **Settings Panel** - Configure all portfolio info through admin interface
 - 🐳 **Docker Ready** - One-command deployment
 - 📱 **Mobile First** - Fully responsive design
 
@@ -55,7 +55,7 @@ cp .env.example .env
 pnpm dev
 ```
 
-🌐 Open [http://localhost:3000/setup](http://localhost:3000/setup) to configure your portfolio!
+🌐 Open [http://localhost:3000/admin](http://localhost:3000/admin) and configure your portfolio in Settings!
 
 ---
 
@@ -81,9 +81,9 @@ pnpm dev
 5. Click **Deploy** ✨
 
 **After deployment:**
-- Navigate to `your-app.vercel.app/setup`
-- Complete wizard to configure your portfolio
-- Upload photos via admin panel
+- Login to admin: `your-app.vercel.app/admin`
+- Configure your portfolio in Settings
+- Upload photos and start showcasing your work
 
 **Pros:**
 - ✅ Zero configuration
@@ -192,12 +192,15 @@ sudo certbot --nginx -d yourdomain.com
 
 ### For Photographers
 
-1. **Complete Setup Wizard** (`/setup`)
+1. **Login to Admin Panel** (`/admin`)
+   - Use your admin password to login
+
+2. **Configure Settings** (`/admin/settings`)
    - Add your name, bio, contact info
    - Upload profile photo
    - Configure email
 
-2. **Upload Photos** (`/admin`)
+3. **Upload Photos** (`/admin`)
    - Click "Upload Photo"
    - Choose album and grid size
    - Drag to reorder

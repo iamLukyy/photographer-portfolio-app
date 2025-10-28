@@ -1,3 +1,16 @@
+export type ThemePreset = 'minimalist' | 'sepia' | 'dark' | 'gradient' | 'custom';
+
+export interface ThemeSettings {
+  preset: ThemePreset;
+  fontFamily: string;
+  customColors?: {
+    primary: string;
+    secondary: string;
+    accent: string;
+    background: string;
+  };
+}
+
 export interface PortfolioSettings {
   photographerName: string;
   location: string;
@@ -8,5 +21,5 @@ export interface PortfolioSettings {
   siteTitle: string;
   languages: string;
   equipment: string;
-  isConfigured: boolean;
+  theme?: ThemeSettings;
 }

@@ -161,14 +161,14 @@ ssh had "sudo systemctl reload nginx"
 ssh had "sudo certbot --nginx -d mareksvaton.cz -d www.mareksvaton.cz"
 ```
 
-### 7. Otevři setup wizard
+### 7. Přihlaš se do admin panelu
 
 Otevři browser a jdi na:
 ```
-https://mareksvaton.cz/setup
+https://mareksvaton.cz/admin
 ```
 
-Vyplň všechny údaje fotografa a dokončit setup.
+Přihlaš se a přejdi do Settings pro nastavení portfolia.
 
 ---
 
@@ -383,7 +383,7 @@ ssh had "cd /var/www/fotimanalogem && sudo docker compose build --no-cache && su
 - [ ] Docker image buildnutý a běžící
 - [ ] Nginx konfigurace vytvořena a aktivována
 - [ ] SSL certifikát získán (Certbot)
-- [ ] Setup wizard dokončen (`/setup`)
+- [ ] Admin settings nakonfigurovány (`/admin/settings`)
 - [ ] Test uploadu fotky v admin panelu
 - [ ] Test kontaktního formuláře
 
@@ -391,13 +391,12 @@ ssh had "cd /var/www/fotimanalogem && sudo docker compose build --no-cache && su
 
 ## 🎨 Post-deployment
 
-1. Otevři `https://mareksvaton.cz/setup`
-2. Vyplň údaje fotografa
-3. Upload profilovou fotku
-4. Přihlaš se do `/admin`
-5. Nahraj první fotky
-6. Test booking systému
-7. Test kontaktního formuláře
+1. Přihlaš se do admin panelu: `https://mareksvaton.cz/admin`
+2. Přejdi do Settings (`/admin/settings`)
+3. Vyplň údaje fotografa a upload profilovou fotku
+4. Nahraj první fotky
+5. Test booking systému
+6. Test kontaktního formuláře
 
 ---
 

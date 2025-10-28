@@ -8,5 +8,8 @@
   "siteTitle": "Photography Portfolio",
   "languages": "English",
   "equipment": "Your camera system",
-  "isConfigured": false
+  "theme": {
+    "preset": "minimalist",
+    "fontFamily": "EB Garamond"
+  }
 }

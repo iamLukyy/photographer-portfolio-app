@@ -12,6 +12,12 @@ const config: Config = {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
+        // Theme-aware colors using CSS variables
+        'theme-primary': 'var(--color-primary)',
+        'theme-secondary': 'var(--color-secondary)',
+        'theme-accent': 'var(--color-accent)',
+        'theme-background': 'var(--color-background)',
+        // Legacy fallbacks (keep for admin pages)
         background: '#ffffff',
         foreground: '#000000',
       },

@@ -76,23 +76,16 @@ Port: 3044 (external) → 3000 (internal)
   "profilePhoto": "/profile-placeholder.svg",
   "siteTitle": "Your Photography Portfolio",
   "languages": "English",
-  "equipment": "Camera system",
-  "isConfigured": false
+  "equipment": "Camera system"
 }
 ```
 
 **API Endpoint**: `/api/settings`
 - GET: Public (no auth) - used by About page, Header, layout metadata
-- PUT: Admin only - updates settings and marks `isConfigured: true`
-
-**Setup Wizard**: `/app/setup/page.tsx`
-- Runs on first launch when `isConfigured === false`
-- 3-step guided configuration
-- Sets all personal information
-- Redirects to admin panel when complete
+- PUT: Admin only - updates settings
 
 **Settings Panel**: `/app/admin/settings/page.tsx`
-- Edit all settings after initial setup
+- Edit all portfolio settings
 - Upload profile photo
 - Real-time preview
 - Auto-save with confirmation
@@ -184,7 +177,6 @@ app/
 ├── page.tsx                  # Home (photo grid)
 ├── about/page.tsx            # About + contact form (uses settings)
 ├── booking/page.tsx          # Booking system
-├── setup/page.tsx            # Setup wizard (first-time config)
 ├── admin/                    # Admin panel
 │   ├── page.tsx             # Photo management
 │   ├── settings/page.tsx    # Settings configuration UI
@@ -250,7 +242,6 @@ NODE_ENV=production                # Set for deployment
 4. **Upload Directory**: Ensure `public/uploads/` exists for admin uploads
 5. **Docker Port**: 3044 mapped to 3000 (change in docker-compose.yml)
 6. **Settings First**: Always check settings.json before hardcoding any personal info
-7. **Setup Wizard**: First launch redirects to `/setup` if `isConfigured === false`
 
 ## Thumbnail Generation Details
 
@@ -269,10 +260,10 @@ NODE_ENV=production                # Set for deployment
 
 ### First-Time Setup (for end users)
 1. Launch application (development or Docker)
-2. Navigate to `/setup` (auto-redirects)
-3. Complete 3-step wizard
-4. Configure Resend API key in `.env`
-5. Access admin panel at `/admin`
+2. Configure Resend API key in `.env`
+3. Login to admin panel at `/admin`
+4. Navigate to Settings to configure portfolio information
+5. Upload photos and start building your portfolio
 
 ### Adding Photos via Admin
 1. Login to `/admin`
@@ -306,7 +297,7 @@ const ADMIN_PASSWORD = 'your_secure_password';
 1. Set `.env` with production values
 2. `docker-compose build`
 3. `docker-compose up -d`
-4. Complete setup wizard at `https://yourdomain.com/setup`
+4. Login to admin panel and configure settings at `https://yourdomain.com/admin/settings`
 5. (Optional) Set up nginx reverse proxy for HTTPS and direct file serving
 
 ## Design System

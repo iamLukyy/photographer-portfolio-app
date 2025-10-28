@@ -1,5 +1,17 @@
 @import 'tailwindcss';
 
+/* ===================================
+   THEME CSS VARIABLES
+   These are dynamically injected by layout.tsx based on settings
+   ================================ === */
+:root {
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-accent: #111827;
+  --color-background: #ffffff;
+  --font-family: 'EB Garamond', -apple-system, BlinkMacSystemFont, Georgia, serif;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -9,11 +21,11 @@ html {
 }
 
 body {
-  font-family: var(--font-eb-garamond), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Arial', sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--color-background);
+  color: var(--color-primary);
   font-weight: 400;
   line-height: 1.5;
 }
@@ -35,7 +47,7 @@ img {
 
 /* Booking Calendar Styles */
 .booking-calendar {
-  font-family: var(--font-eb-garamond), serif;
+  font-family: var(--font-family);
 }
 
 .booking-calendar .rbc-toolbar {
