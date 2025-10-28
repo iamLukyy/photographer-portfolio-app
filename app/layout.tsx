@@ -49,12 +49,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Theme CSS Variables - MUST come first */}
+        {/* Preconnect FIRST for faster DNS resolution */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* Theme CSS Variables - inline for instant render */}
         <style dangerouslySetInnerHTML={{ __html: themeCSS }} />
 
-        {/* Preload & Load Google Font - display=block prevents FOUC */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Google Font with high priority - display=swap for progressive enhancement */}
         <link rel="preload" as="style" href={fontUrl} />
         <link rel="stylesheet" href={fontUrl} />
       </head>

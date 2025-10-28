@@ -3,14 +3,8 @@
 /* ===================================
    THEME CSS VARIABLES
    These are dynamically injected by layout.tsx based on settings
+   DO NOT set defaults here - they are set server-side
    ================================ === */
-:root {
-  --color-primary: #000000;
-  --color-secondary: #ffffff;
-  --color-accent: #111827;
-  --color-background: #ffffff;
-  --font-family: 'EB Garamond', -apple-system, BlinkMacSystemFont, Georgia, serif;
-}
 
 * {
   box-sizing: border-box;

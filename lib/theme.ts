@@ -173,11 +173,11 @@ export function generateFontUrl(fontName: string): string {
   const font = AVAILABLE_FONTS.find((f) => f.name === fontName);
   if (!font) {
     // Fallback to EB Garamond
-    return 'https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=block';
+    return 'https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap';
   }
 
   const weights = font.weights.join(';');
-  return `https://fonts.googleapis.com/css2?family=${font.googleFontName}:wght@${weights}&display=block`;
+  return `https://fonts.googleapis.com/css2?family=${font.googleFontName}:wght@${weights}&display=swap`;
 }
 
 /**
