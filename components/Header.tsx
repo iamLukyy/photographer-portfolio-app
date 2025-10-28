@@ -32,13 +32,19 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm">
+    <header
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm"
+      style={{
+        backgroundColor: 'color-mix(in srgb, var(--color-background) 95%, transparent)'
+      }}
+    >
       <nav className="max-w-[1920px] mx-auto px-6 sm:px-12 lg:px-16 xl:px-20">
         <div className="flex justify-between items-center h-20">
           {/* Logo / Name */}
           <Link
             href="/"
             className="text-base sm:text-xl font-normal tracking-wide hover:opacity-60 transition-opacity duration-300 uppercase whitespace-nowrap"
+            style={{ color: 'var(--color-primary)' }}
           >
             {settings?.siteTitle || 'Photography Portfolio'}
           </Link>
@@ -54,6 +60,7 @@ export default function Header() {
                     ? 'opacity-100'
                     : 'opacity-50 hover:opacity-100'
                 }`}
+                style={{ color: 'var(--color-primary)' }}
               >
                 {item.name}
               </Link>
@@ -65,6 +72,7 @@ export default function Header() {
             className="md:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
+            style={{ color: 'var(--color-primary)' }}
           >
             <svg
               className="w-5 h-5"
@@ -103,6 +111,7 @@ export default function Header() {
                         ? 'opacity-100'
                         : 'opacity-50'
                     }`}
+                    style={{ color: 'var(--color-primary)' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
