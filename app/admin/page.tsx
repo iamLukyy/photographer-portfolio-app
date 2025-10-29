@@ -280,12 +280,12 @@ export default function AdminPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Check file size (Vercel Free tier limit: 4.5MB)
-    const maxSizeMB = 4.5;
+    // Check file size (max 100MB)
+    const maxSizeMB = 100;
     const fileSizeMB = file.size / (1024 * 1024);
 
     if (fileSizeMB > maxSizeMB) {
-      alert(`File is too large (${fileSizeMB.toFixed(1)}MB). Maximum size on Vercel Free tier is ${maxSizeMB}MB. Please compress your image or upgrade to Vercel Pro.`);
+      alert(`File is too large (${fileSizeMB.toFixed(1)}MB). Maximum size is ${maxSizeMB}MB. Please compress your image.`);
       e.target.value = '';
       return;
     }
@@ -317,7 +317,7 @@ export default function AdminPage() {
           body: errorDetails,
         });
         if (res.status === 413) {
-          alert('File is too large. Vercel Free tier has a 4.5MB limit. Please compress your image or upgrade to Vercel Pro for 100MB limit.');
+          alert('File is too large. Maximum size is 100MB. Please compress your image.');
         } else {
           const errorMsg = errorDetails && typeof errorDetails === 'object' && 'error' in errorDetails
             ? String(errorDetails.error)
@@ -446,8 +446,8 @@ export default function AdminPage() {
                 />
               </label>
               <div className="hidden group-hover:block absolute top-full right-0 mt-2 w-64 bg-gray-900 text-white text-xs p-3 rounded shadow-lg z-50">
-                📦 Max size: <strong>4.5MB</strong> (Vercel Free)<br/>
-                💡 Compress large images before upload
+                📦 Max size: <strong>100MB</strong><br/>
+                💡 Compress very large images for faster loading
               </div>
             </div>
           </div>
