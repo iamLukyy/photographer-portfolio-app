@@ -6,23 +6,42 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A generic photography portfolio template with integrated booking system. Built with Next.js 15, featuring photo grid with lightbox, booking system, admin panel, and complete customization through web UI. **No code editing required** for photographers to personalize their portfolio.
 
-## VPS Deployment (mareksvaton.cz)
+## VPS Deployment (TWO SEPARATE INSTANCES)
 
-**Production Server**:
+**CRITICAL**: This project runs on TWO separate instances on the VPS. **NEVER delete or modify lukaskarel.com instance!**
+
+### lukaskarel.com (PRIMARY - LUKAS'S PERSONAL PORTFOLIO)
+- **SSH Access**: `ssh had`
+- **Project Path**: `/var/www/lukaskarel-portfolio`
+- **Public URL**: `https://lukaskarel.com`
+- **Docker Container**: `lukaskarel-portfolio-app`
+- **Docker Port**: 3044 (external) → 3000 (internal)
+- **Data Storage**: `/var/www/photo-portfolio-data/`
+  - Photos: `/var/www/photo-portfolio-data/uploads/`
+  - Metadata: `/var/www/photo-portfolio-data/lib/` (settings.json, photos.json, bookings.json, coupons.json)
+- **⚠️ WARNING**: This is Lukas's personal production site. Never delete data or container!
+
+### mareksvaton.cz (SECONDARY - CLIENT SITE)
 - **SSH Access**: `ssh had`
 - **Project Path**: `/var/www/fotimanalogem`
 - **Public URL**: `https://mareksvaton.cz`
-- **Docker Port**: 3055 (internal → 3000)
+- **Docker Container**: `fotimanalogem-app`
+- **Docker Port**: 3055 (external) → 3000 (internal)
 - **Data Storage**: `/var/www/fotimanalogem/data/`
   - Photos: `/var/www/fotimanalogem/data/uploads/`
   - Metadata: `/var/www/fotimanalogem/data/lib/` (settings.json, photos.json, bookings.json, coupons.json)
 
 **Common VPS Commands**:
 ```bash
-ssh had "cd /var/www/fotimanalogem && git pull"                    # Pull latest changes
+# lukaskarel.com
+ssh had "cd /var/www/lukaskarel-portfolio && docker compose logs -f"       # View logs
+ssh had "cd /var/www/lukaskarel-portfolio && docker compose restart"       # Restart
+
+# mareksvaton.cz
+ssh had "cd /var/www/fotimanalogem && git pull"                            # Pull latest changes
 ssh had "cd /var/www/fotimanalogem && docker compose build && docker compose up -d"  # Rebuild and restart
-ssh had "cd /var/www/fotimanalogem && docker compose logs -f"       # View logs
-ssh had "cd /var/www/fotimanalogem && docker compose restart"       # Quick restart
+ssh had "cd /var/www/fotimanalogem && docker compose logs -f"              # View logs
+ssh had "cd /var/www/fotimanalogem && docker compose restart"              # Quick restart
 ```
 
 **Complete deployment guide**: See `VPS_DEPLOYMENT.md` in project root.
@@ -57,7 +76,7 @@ docker-compose logs -f    # View logs
 docker-compose restart    # Restart
 docker-compose down       # Stop and remove
 ```
-Port: 3044 (external) → 3000 (internal)
+**Note**: External port varies per deployment (see VPS Deployment section). Internal port is always 3000.
 
 ## Architecture & Data Flow
 

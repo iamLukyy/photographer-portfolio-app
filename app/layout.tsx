@@ -65,7 +65,7 @@ export default function RootLayout({
         <link rel="stylesheet" href={fontUrl} />
       </head>
       <body>
-        <Header />
+        <Header settings={settings} />
         <main>{children}</main>
       </body>
     </html>

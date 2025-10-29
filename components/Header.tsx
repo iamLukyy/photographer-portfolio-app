@@ -2,28 +2,17 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { PortfolioSettings } from '@/types/settings';
 
-export default function Header() {
+interface HeaderProps {
+  settings?: PortfolioSettings | null;
+}
+
+export default function Header({ settings }: HeaderProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [settings, setSettings] = useState<PortfolioSettings | null>(null);
-
-  useEffect(() => {
-    fetchSettings();
-  }, []);
-
-  const fetchSettings = async () => {
-    try {
-      const res = await fetch('/api/settings');
-      const data = await res.json();
-      setSettings(data);
-    } catch (error) {
-      console.error('Failed to fetch settings:', error);
-    }
-  };
 
   // Filter nav items based on settings
   const navItems = [
